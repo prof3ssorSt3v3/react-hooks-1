@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+// npx create-react-app hooks1
+//the App.js file from version 17 of React
+//images and default content removed
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+  //let hungry = false;
+  const [hungry, setHungry] = useState(false);
+  const [num, setNum] = useState(1);
+  let changeNum = () => {
+    setNum((n) => n + 1);
+  };
+  let handleClick = () => {
+    //hungry = !hungry;
+    setHungry(!hungry);
+  };
+
+  useEffect(() => {
+    //runs when num is changed
+    console.log(num);
+  }, [num]);
+  useEffect(() => {
+    document.title = Math.random().toString(16);
+  }, [hungry, num]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 onClick={handleClick}>Hungry `Function`</h1>
+      <p onClick={changeNum}>
+        Learn React when you are {hungry ? 'REALLY' : 'NOT'} hungry.
+      </p>
     </div>
   );
 }
